@@ -191,7 +191,7 @@ func (performer *performer) Start() error {
 	return performer.startDB()
 }
 
-// The Single state.
+// Single; state.
 func (performer *performer) Single() error {
 	config.Log.Info("transitioning to Single")
 
@@ -275,7 +275,7 @@ COMMIT;`, performer.config.SystemUser, sync))
 
 }
 
-// The Active state.
+// Active; state.
 func (performer *performer) Active() error {
 	config.Log.Info("transitioning to Active")
 	if err := performer.replicate(false); err != nil {
@@ -349,7 +349,7 @@ func (performer *performer) Active() error {
 	return nil
 }
 
-// The Backup state.
+// Backup; state.
 func (performer *performer) Backup() error {
 	config.Log.Info("transitioning to Backup")
 	performer.removeVip()
@@ -374,7 +374,7 @@ func (performer *performer) Backup() error {
 	return performer.me.SetDBRole("backup")
 }
 
-// this will kill the database that is running. reguardless of its current state
+// killDB will kill the database that is running. reguardless of its current state
 func (performer *performer) killDB() {
 	config.Log.Debug("[action] KillingDB")
 

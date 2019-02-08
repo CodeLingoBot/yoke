@@ -40,7 +40,7 @@ type (
 
 var states = "states"
 
-// Creates and returns a state that represents a state on the local machine.
+// NewLocalState creates and returns a state that represents a state on the local machine.
 func NewLocalState(role, location, dataDir string, store Store) (LocalState, error) {
 	newState := state{}
 

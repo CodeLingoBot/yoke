@@ -60,7 +60,7 @@ func NewDecider(me, other, monitor state.State, performer Performer) Looper {
 	}
 }
 
-// this is the main loop for monitoring the cluster and making any changes needed to
+// Loop is the main loop for monitoring the cluster and making any changes needed to
 // reflect changes in remote nodes in the cluster
 func (decider decider) Loop(check time.Duration) error {
 	timer := time.Tick(check)
@@ -76,7 +76,7 @@ func (decider decider) Loop(check time.Duration) error {
 	return nil
 }
 
-// this is used to move a active node to a backup node
+// Demote is used to move a active node to a backup node
 func (decider decider) Demote() {
 	decider.Lock()
 	defer decider.Unlock()
@@ -84,7 +84,7 @@ func (decider decider) Demote() {
 	decider.performer.TransitionToBackup()
 }
 
-// this is used to move a backup node to an active node
+// Promote is used to move a backup node to an active node
 func (decider decider) Promote() {
 	decider.Lock()
 	defer decider.Unlock()
@@ -92,7 +92,7 @@ func (decider decider) Promote() {
 	decider.performer.TransitionToActive()
 }
 
-// Checks the other node in the cluster, falling back to bouncing the check off of the monitor,
+// reCheck checks the other node in the cluster, falling back to bouncing the check off of the monitor,
 // to see if the states between this node and the remote node match up
 func (decider decider) reCheck() error {
 	decider.Lock()

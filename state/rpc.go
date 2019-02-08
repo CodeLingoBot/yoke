@@ -32,7 +32,7 @@ type (
 	Nil struct{}
 )
 
-// Starts the RPC listening server, enables remote communication with local state objects
+// ExposeRPCEndpoint starts the RPC listening server, enables remote communication with local state objects
 func (local *state) ExposeRPCEndpoint(network, location string) (io.Closer, error) {
 	wrap := StateRPC{
 		state: local,
@@ -53,7 +53,7 @@ func (local *state) ExposeRPCEndpoint(network, location string) (io.Closer, erro
 	return listener, nil
 }
 
-// Creates and returns a State that represents a state reachable over an rpc connection
+// NewRemoteState creates and returns a State that represents a state reachable over an rpc connection
 func NewRemoteState(network, location string, timeout time.Duration) State {
 	remote := remoteState{
 		timeout:  timeout,
